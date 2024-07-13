@@ -1,3 +1,3 @@
-from url_shrotener import create_app
+from url_shortener import create_app
 
 create_app().run(debug=True)

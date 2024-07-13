@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template
+from flask import Blueprint,render_template,request
 
 short = Blueprint('short', __name__)
 
@@ -12,12 +12,13 @@ def index():
 
 @short.route('/add_link',methods=['POST'])
 def add_link():
-    pass
+    orignal_url = request.form['orignal_url']
+    link = Link(original_url=original_url)
+    db.session.add(link)
+    db.session.commit()
 
-
-@short.route('/stats')
-def stats():
-    pass
+    return render_template('link_added.html',
+         new_link=link.short_url,original_url=link.original_url)
 
 @short.errorhandler(404)
 def page_not_found(e):
