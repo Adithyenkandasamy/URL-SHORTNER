@@ -1,6 +1,6 @@
 import os
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///db.sqlite3'#os.environ.get('DATABASE_URL')
+SQLALCHEMY_DATABASE_URI ='sqlite:///db.sqlite3'
 
 SQALCHEMY_TRACK_MODIFICATIONS = False
 

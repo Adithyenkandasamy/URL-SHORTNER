@@ -9,7 +9,6 @@ def create_app(config_file='settings.py'):
     app.config.from_pyfile(config_file)
 
     db.init_app(app)
-
     with app.app_context():
         db.create_all()
     

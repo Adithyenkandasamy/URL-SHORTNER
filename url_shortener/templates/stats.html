@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Makkalaa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      
+        <table class="table">
+          <thead>
+              <tr>
+                  <th>Original URL</th>
+                  <th>Short URL</th>
+                  <th>Visits</th>
+                  
+                </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Original URL</th>
+              <th>Short URL</th>
+              <th>Visits</th>
+              
+            </tr>
+          </tfoot>
+          <tbody>
+              {% for link in links %}
+              <tr>
+                  <td> {{ link.original_url }} </td> 
+                  <td> {{ url_for('short.redirect_to_url', short_url=link.short_url, _external=True) }} </td>
+                  <td> {{ link.visits }}</td>
+              </tr>    
+                {% endfor %}
+            
+            </tr>
+            
+          </tbody>
+        </table>
+    </div>
+  </section>
+  </body>
+</html>
