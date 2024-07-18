@@ -17,22 +17,22 @@ def redirect_to_url(short_url):
 def index():
     return render_template('index.html')
 
-@short.route('/add_link',methods=['POST'])
+@short.route('/add_link',methods=['POST'])#post=create
 @requires_auth
 def add_link():
     original_url = request.form['original_url']
     link = Link(original_url=original_url)
     db.session.add(link)
     db.session.commit()
+    return render_template('link_added.html', new_link=link.short_url, original_url=link.original_url)
 
-    return render_template('link_added.html',
-         new_link=link.short_url,orignal_url=link.original_url)
-
+print("hi ghg")
 @short.route('/stats')
 @requires_auth
 def stats():
        links = Link.query.all()
-       return render_template('stats.html',links=links)    
+       return render_template('stats.html',links=links)     
+
 @short.errorhandler(404)
 def page_not_found(e):
-    return render_templates('404.html'), 404
+    return render_template('404.html'), 404
