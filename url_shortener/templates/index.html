@@ -7,24 +7,39 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
   </head>
   <body>
-  <section class="section">
-    <div class="container">
+    <section class="section">
+      <div class="container">
+        <h1 class="title">URL Shortener</h1>
+        <p class="subtitle">Enter the original URL and optionally specify a custom short URL.</p>
+
         <form method="POST" action="{{ url_for('short.add_link') }}">
-            
-            <div class="field">
-                <label class="label">Original URL</label>
-                <div class="control">
-                    <input class="input" type="text" name="original_url">
-                </div>
-            </div>
+
+          <!-- Original URL Field -->
+          <div class="field">
+            <label class="label">Original URL</label>
             <div class="control">
-              <button class="button is-info">
-                Shorten 
-              </button>
+              <input class="input" type="url" name="original_url" placeholder="https://example.com" required>
             </div>
-            
+          </div>
+
+          <!-- Custom Short URL Field -->
+          <div class="field">
+            <label class="label">Custom Short URL (optional)</label>
+            <div class="control">
+              <input class="input" type="text" name="custom_short_url" placeholder="Enter custom short URL (e.g., mycustomurl)">
+            </div>
+            <p class="help">Leave this field blank to generate a random short URL.</p>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="field">
+            <div class="control">
+              <button class="button is-info">Shorten</button>
+            </div>
+          </div>
+
         </form>
-    </div>
-  </section>
+      </div>
+    </section>
   </body>
-</html>        
+</html>
