@@ -1,45 +1,58 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello Makkalaa</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
-  </head>
-  <body>
+    <style>
+        .result { margin-top: 20px; }
+    </style>
+</head>
+<body>
     <section class="section">
-      <div class="container">
-        <h1 class="title">URL Shortener</h1>
-        <p class="subtitle">Enter the original URL and optionally specify a custom short URL.</p>
+        <div class="container">
+            <h1 class="title">URL Shortener</h1>
+            <p class="subtitle">Enter the original URL and optionally specify a custom short URL.</p>
 
-        <form method="POST" action="{{ url_for('short.add_link') }}">
+            <form method="POST" action="{{ url_for('short.add_link') }}">
+                <div class="field">
+                    <label class="label">Original URL</label>
+                    <div class="control">
+                        <input class="input" type="url" name="original_url" placeholder="https://example.com" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Custom Short URL (optional)</label>
+                    <div class="control">
+                        <input class="input" type="text" name="custom_short_url" placeholder="Enter custom short URL (e.g., mycustomurl)">
+                    </div>
+                    <p class="help">Leave this field blank to generate a random short URL.</p>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-info">Shorten</button>
+                    </div>
+                </div>
+            </form>
 
-          <!-- Original URL Field -->
-          <div class="field">
-            <label class="label">Original URL</label>
-            <div class="control">
-              <input class="input" type="url" name="original_url" placeholder="https://example.com" required>
+            <div class="result" id="result" style="display: none;">
+                <h2 class="subtitle">Shortened URL:</h2>
+                <p id="shortenedUrl" class="has-text-weight-bold"></p>
             </div>
-          </div>
-
-          <!-- Custom Short URL Field -->
-          <div class="field">
-            <label class="label">Custom Short URL (optional)</label>
-            <div class="control">
-              <input class="input" type="text" name="custom_short_url" placeholder="Enter custom short URL (e.g., mycustomurl)">
-            </div>
-            <p class="help">Leave this field blank to generate a random short URL.</p>
-          </div>
-
-          <!-- Submit Button -->
-          <div class="field">
-            <div class="control">
-              <button class="button is-info">Shorten</button>
-            </div>
-          </div>
-
-        </form>
-      </div>
+        </div>
     </section>
-  </body>
+
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const originalUrl = form.original_url.value;
+            const customShortUrl = form.custom_short_url.value || 'generatedShortUrl';
+            const shortenedUrl = `https://short.ly/${customShortUrl}`;
+            document.getElementById('shortenedUrl').innerText = shortenedUrl;
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+</body>
 </html>
